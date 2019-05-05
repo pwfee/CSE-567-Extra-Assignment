@@ -47,43 +47,43 @@ def main():
 	
 	for idx, fname in enumerate(train_set):
 		fname = "chtb_%s.fid.utf8" % fname
-#		print "[Convert][Train Dataset]Filename:%s (%s/%s)" % (fname, idx + 1, len(train_set))
-#		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
-#		info = pp.readlines()
-#		f = open(OUTPUT_TRAIN,'a')
-#		for line in info:  
-#			f.write(line)    
-#		f.close()
+		print "[Convert][Train Dataset]Filename:%s (%s/%s)" % (fname, idx + 1, len(train_set))
+		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
+		info = pp.readlines()
+		f = open(OUTPUT_TRAIN,'a')
+		for line in info:  
+			f.write(line)    
+		f.close()
 
 	for idx, fname in enumerate(train_set):
 		fname = "chtb_%s.fid.utf8" % fname
 		print "[Convert][Train Dataset]Filename:%s (%s/%s)" % (fname, idx + 1, len(train_set))
-#		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
-#		info = pp.readlines()
-#		f = open(OUTPUT_TRAIN,'a')
-#		for line in info:  
-#			f.write(line)    
-#		f.close()
+		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
+		info = pp.readlines()
+		f = open(OUTPUT_TRAIN,'a')
+		for line in info:  
+			f.write(line)    
+		f.close()
 
 	for idx, fname in enumerate(dev_set):
 		fname = "chtb_%s.fid.utf8" % fname
 		print "[Convert][Dev Dataset]Filename:%s (%s/%s)" % (fname, idx + 1, len(dev_set))
-#		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
-#		info = pp.readlines()
-#		f = open(OUTPUT_TRAIN,'a')
-#		for line in info:  
-#			f.write(line)    
-#		f.close()
+		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
+		info = pp.readlines()
+		f = open(OUTPUT_TRAIN,'a')
+		for line in info:  
+			f.write(line)    
+		f.close()
 
 	for idx, fname in enumerate(test_set):
 		fname = "chtb_%s.fid.utf8" % fname
 		print "[Convert][Test Dataset]Filename:%s (%s/%s)" % (fname, idx + 1, len(test_set))
-#		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
-#		info = pp.readlines()
-#		f = open(OUTPUT_TRAIN,'a')
-#		for line in info:  
-#			f.write(line)    
-#		f.close()
+		pp = os.popen("cd " + NLP_TOOLS_PATH + " && " + JAVA_COMMAND + TREE_BANKS_PATH + "/" + fname) 
+		info = pp.readlines()
+		f = open(OUTPUT_TRAIN,'a')
+		for line in info:  
+			f.write(line)    
+		f.close()
 		
 	print "[End]Data successfully separate"
 		
