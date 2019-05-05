@@ -2,18 +2,54 @@
 
 Constituent to dependency structure
 
+https://www.overleaf.com/project/5cca516ece89d91797565b61
+
 #### 1. Corpus preparation and Constituent parsing
 
-First, we use `data.py` to separate the treebank data based on Chinese Penn Treebank. 
+First, we have to decide the data split scheme.
 
-We can specify the rate of training and testing dataset in the Python script. 
+Refer to [Improved Inference for Unlexicalized Parsing
+](http://www.coli.uni-saarland.de/~yzhang/rapt-ws1112/papers/petrov_2007.pdf), we choose this scheme.
 
-As default, we use 8:2 as train_rate/test_rate.
+|  | TrainSet | DevSet | TestSet |
+| --- | --- | --- | --- |
+| ArticleID | 1-270, 400-1151 | 301-325 | 271-300 |
+
+Then we use Python to extract the <S> </S> from the SGML files `ctb5.1/bracketed/chtb_*.fid.utf8`
+
+#### GrammarTrainer
+```
+$ java -cp berkeleyParser.jar edu.berkeley.nlp.PCFGLA.GrammarTrainer -path revise/train.txt -out chinese.gr --treebank SINGLEFILE
+```
+
+#### Test Model
 
 ```
-$ python data.py
+$ java -jar berkeleyParser.jar -gr chinese.gr -inputFile revise/test.txt -outputFile revise/parsed.txt
+```
 
-[Start]TRAIN_RATE: 80% TEST_RATE: 20%
+#### Eval Model
+
+```
+$ evalb -p COLLINS.prm revise/train.txt revise/parsed.txt
+```
+
+#### 2. Corpus converting to Dependency structure
+
+We use Stanford Parser to convert the treebank to universal dependency.
+
+https://nlp.stanford.edu/software/lex-parser.html
+
+```
+java -cp "*" -Xmx1g edu.stanford.nlp.trees.international.pennchinese.UniversalChineseGrammaticalStructure -checkConnected -basic -keepPunct -conllx -treeFile treebank.txt
+``` 
+
+After using `parse.py`, it automatically separate the data and call the Stanford Parser to convert the treebank.
+
+```
+$ python parse.py
+
+[Start]
 [Convert][Train Dataset]Filename:chtb_073.fid.utf8 (1/712)
 [Convert][Train Dataset]Filename:chtb_215.fid.utf8 (2/712)
 [Convert][Train Dataset]Filename:chtb_214.fid.utf8 (3/712)
@@ -30,17 +66,6 @@ $ python data.py
 [End]Data successfully separate
 ```
 
-#### 2. Corpus converting to Dependency structure
-
-We use Stanford Parser to convert the treebank to universal dependency.
-
-https://nlp.stanford.edu/software/lex-parser.html
-
-```
-java -cp "*" -Xmx1g edu.stanford.nlp.trees.international.pennchinese.UniversalChineseGrammaticalStructure -checkConnected -basic -keepPunct -conllx -treeFile treebank.txt
-``` 
-
-After using `data.py`, it automatically separate the data and call the Stanford Parser to convert the treebank.
 
 
 #### 3. Dependency parsing
@@ -55,4 +80,6 @@ $ ./udpipe --accuracy  --parse model/ctb_ud.model data/test.conllu
 Parsing from gold tokenization with gold tags - forms: 109239, 
 UAS: 79.78%, LAS: 76.73%
 ```
+
+
 
