@@ -2,6 +2,8 @@
 
 Constituent to dependency structure
 
+Author: Wenfeng Pan, Nannan Zhai
+
 https://www.overleaf.com/read/yqstjcmznfxs
 
 #### 1. Corpus preparation and Constituent parsing
